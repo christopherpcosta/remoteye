@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Config
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Config</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-radio-group value="remote" [(ngModel)]="networkValue" (ionChange)="this.onChangeMerdas($event)">
+      <ion-list-header>
+        <ion-label>IP Address</ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Local</ion-label>
+        <ion-radio slot="start" value="local"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Remote</ion-label>
+        <ion-radio slot="start" value="remote"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+</ion-content>

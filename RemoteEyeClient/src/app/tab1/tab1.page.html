@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Hardware Monitor
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Hardware Monitor</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item *ngFor="let DashItem of Dashboard">
+    <ion-label>{{DashItem.Name}}</ion-label>
+    <ion-badge slot="end">{{DashItem.Temperature}}</ion-badge>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label>Total Paid (EUR)</ion-label>
+    <ion-badge color="light" slot="end">{{Ethermine.totalPaidEuro}} €</ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-label>Remaining to objective (EUR)</ion-label>
+    <ion-badge color="danger" slot="end">{{Ethermine.remainingEuro}}</ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-label>Current Haxixe</ion-label>
+    <ion-badge color="light" slot="end">{{Ethermine.currentHashrate}}</ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-label>Reported Haxixe</ion-label>
+    <ion-badge color="light" slot="end">{{Ethermine.reportedHashrate}}</ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-label>Average Haxixe</ion-label>
+    <ion-badge color="light" slot="end">{{Ethermine.averageHashrate}}</ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-label>Valid Shares</ion-label>
+    <ion-badge color="light" slot="end">{{Ethermine.validShares}}</ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-label>Invalid Shares</ion-label>
+    <ion-badge color="light" slot="end">{{Ethermine.invalidShares}}</ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-label>Unpaid Balance</ion-label>
+    <ion-badge color="light" slot="end">{{Ethermine.UnpaidBalancer}} ETH</ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-label>Coin per day</ion-label>
+    <ion-badge color="light" slot="end">{{Ethermine.coinperdayJOAO}} ETH/day</ion-badge>
+  </ion-item>
+</ion-content>

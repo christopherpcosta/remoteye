@@ -1,0 +1,11 @@
+{
+  "name": "RemoteEyeClient",
+  "integrations": {},
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/HardwareMonitor",
+      "proxyUrl": "http://109.51.26.39:8085/data.json"
+    }
+  ]
+}
