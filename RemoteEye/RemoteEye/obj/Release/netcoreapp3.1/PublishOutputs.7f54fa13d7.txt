@@ -1,0 +1,8 @@
+C:\Development\RemoteEyeProject\RemoteEye\RemoteEye\obj\Release\netcoreapp3.1\PubTmp\Out\RemoteEye.exe
+C:\Development\RemoteEyeProject\RemoteEye\RemoteEye\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
+C:\Development\RemoteEyeProject\RemoteEye\RemoteEye\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json
+C:\Development\RemoteEyeProject\RemoteEye\RemoteEye\obj\Release\netcoreapp3.1\PubTmp\Out\RemoteEye.dll
+C:\Development\RemoteEyeProject\RemoteEye\RemoteEye\obj\Release\netcoreapp3.1\PubTmp\Out\RemoteEye.deps.json
+C:\Development\RemoteEyeProject\RemoteEye\RemoteEye\obj\Release\netcoreapp3.1\PubTmp\Out\RemoteEye.runtimeconfig.json
+C:\Development\RemoteEyeProject\RemoteEye\RemoteEye\obj\Release\netcoreapp3.1\PubTmp\Out\RemoteEye.pdb
+C:\Development\RemoteEyeProject\RemoteEye\RemoteEye\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.dll

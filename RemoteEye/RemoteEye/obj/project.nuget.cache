@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "mIRwgrFCNn4CV7jW0Zt9Wt5jsqUFNU1FYQDQUKUSGk9R7hSgiAyygfStowUQx7nUIRMm/Cioeh9+zoHD/2WU6w==",
+  "success": true,
+  "projectFilePath": "C:\\Development\\RemoteEyeProject\\RemoteEye\\RemoteEye\\RemoteEye.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\chris\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
