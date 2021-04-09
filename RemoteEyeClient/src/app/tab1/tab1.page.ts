@@ -20,7 +20,8 @@ export class Tab1Page {
     alreadyPaid: "",
     totalPaid: 0.00,
     totalPaidEuro: "",
-    remainingEuro: 0.00,
+    totalPaidEth: "",
+    remainingEuro: "",
     coinperdayJOAO: ""
   }
 
@@ -59,6 +60,7 @@ export class Tab1Page {
         let data2 = await result.text();
         try {
           let array = JSON.parse(data2);
+          console.log(array);
           this.findTemp(array.Children);
         }
         catch (err) {
@@ -66,6 +68,30 @@ export class Tab1Page {
         }
       });
     }
+
+    if (this.IPAddress == "remote") {
+      let response2 = fetch(
+        "http://109.51.26.39:8086/data.json",
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'GET'
+        }
+      ).then(async result => {
+        let data2 = await result.text();
+        try {
+          let array = JSON.parse(data2);
+          console.log(array);
+          this.findTemp(array.Children);
+        }
+        catch (err) {
+
+        }
+      });
+    }
+
+
 
     if (this.IPAddress == "local") {
       let responseLocal = fetch(
@@ -87,8 +113,6 @@ export class Tab1Page {
         }
       });
     }
-
-
   }
 
   getEthermine() {
@@ -117,10 +141,6 @@ export class Tab1Page {
 
       }
     });
-
-
-
-
   }
 
   fetchPayout() {
@@ -156,8 +176,9 @@ export class Tab1Page {
       try {
         let array = JSON.parse(data2);
 
+        this.Ethermine.totalPaidEth = (this.Ethermine.totalPaid).toFixed(4);
         this.Ethermine.totalPaidEuro = (this.Ethermine.totalPaid * array.lprice).toFixed(2);
-        this.Ethermine.remainingEuro = 2000 - Number(this.Ethermine.totalPaidEuro);
+        this.Ethermine.remainingEuro = (Number(window.localStorage.getItem("initialVest")) - Number(this.Ethermine.totalPaidEuro)).toFixed(2);
 
         this.fetchCurrentStats();
       }
@@ -195,7 +216,6 @@ export class Tab1Page {
       let data2 = await result.text();
       try {
         let array = JSON.parse(data2);
-        console.log(array);
         this.Ethermine.averageHashrate = (array.data[0].averageHashrate/ 1000000).toFixed(2);
       }
       catch (err) {
@@ -209,16 +229,21 @@ export class Tab1Page {
     jsonResponse.forEach(element => {
 
       if (element.Text.indexOf('NVIDIA') > -1) {
-        this.Dashboard.push({ Name: element.Text, Temperature: element.Children[1].Children[0].Max });
+        this.Dashboard.push({ Name: element.Text, Temperature: element.Children[1].Children[0].Value + " || " + element.Children[1].Children[0].Max});
       }
       else if (element.Text.indexOf('Intel') > -1) {
-        this.Dashboard.push({ Name: element.Text, Temperature: element.Children[1].Children[0].Max });
-
+        this.Dashboard.push({ Name: element.Text, Temperature: element.Children[1].Children[0].Value + " || " + element.Children[1].Children[0].Max });
+      }
+      else if(element.Text.indexOf('Radeon') > -1)
+      {
+        this.Dashboard.push({ Name: element.Text, Temperature: element.Children[2].Children[0].Value + " || " + element.Children[2].Children[0].Max });
       }
       else {
         this.findTemp(element.Children);
       }
     });
   }
+
+  
 
 }

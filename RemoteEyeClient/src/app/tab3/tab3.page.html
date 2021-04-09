@@ -28,7 +28,13 @@
         <ion-label>Remote</ion-label>
         <ion-radio slot="start" value="remote"></ion-radio>
       </ion-item>
+
     </ion-radio-group>
+
+    <ion-item >
+      <ion-label>Initial investmnet</ion-label>
+      <ion-input (ionChange)="this.onChangeInitial($event)" [(ngModel)]="initialValue" value="2000"></ion-input>
+    </ion-item>
   </ion-list>
 
 </ion-content>

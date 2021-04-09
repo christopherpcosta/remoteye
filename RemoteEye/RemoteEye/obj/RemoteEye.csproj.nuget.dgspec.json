@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Development\\RemoteEyeProject\\RemoteEye\\RemoteEye\\RemoteEye.csproj": {}
+    "C:\\Development\\remoteye\\RemoteEye\\RemoteEye\\RemoteEye.csproj": {}
   },
   "projects": {
-    "C:\\Development\\RemoteEyeProject\\RemoteEye\\RemoteEye\\RemoteEye.csproj": {
+    "C:\\Development\\remoteye\\RemoteEye\\RemoteEye\\RemoteEye.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Development\\RemoteEyeProject\\RemoteEye\\RemoteEye\\RemoteEye.csproj",
+        "projectUniqueName": "C:\\Development\\remoteye\\RemoteEye\\RemoteEye\\RemoteEye.csproj",
         "projectName": "RemoteEye",
-        "projectPath": "C:\\Development\\RemoteEyeProject\\RemoteEye\\RemoteEye\\RemoteEye.csproj",
+        "projectPath": "C:\\Development\\remoteye\\RemoteEye\\RemoteEye\\RemoteEye.csproj",
         "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Development\\RemoteEyeProject\\RemoteEye\\RemoteEye\\obj\\",
+        "outputPath": "C:\\Development\\remoteye\\RemoteEye\\RemoteEye\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -46,9 +46,17 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
