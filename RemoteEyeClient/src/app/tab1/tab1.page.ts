@@ -17,7 +17,7 @@ export class Tab1Page {
     averageHashrate: "",
     validShares: 0,
     invalidShares: 0,
-    alreadyPaid: "",
+    alreadyPaid: 0.000000,
     totalPaid: 0.00,
     totalPaidEuro: "",
     totalPaidEth: "",
@@ -48,7 +48,7 @@ export class Tab1Page {
       this.IPAddress = value;
 
     if (this.IPAddress == "remote") {
-      let response2 = fetch(
+      fetch(
         "http://109.51.26.39:8085/data.json",
         {
           headers: {
@@ -60,42 +60,38 @@ export class Tab1Page {
         let data2 = await result.text();
         try {
           let array = JSON.parse(data2);
-          console.log(array);
           this.findTemp(array.Children);
         }
         catch (err) {
 
         }
+      }).then(() => {
+        fetch(
+          "http://109.51.26.39:8086/data.json",
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            method: 'GET'
+          }
+        ).then(async result => {
+          let data2 = await result.text();
+          try {
+            let array = JSON.parse(data2);
+            this.findTemp(array.Children);
+            this.Dashboard.sort();
+          }
+          catch (err) {
+
+          }
+        });
       });
     }
-
-    if (this.IPAddress == "remote") {
-      let response2 = fetch(
-        "http://109.51.26.39:8086/data.json",
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: 'GET'
-        }
-      ).then(async result => {
-        let data2 = await result.text();
-        try {
-          let array = JSON.parse(data2);
-          console.log(array);
-          this.findTemp(array.Children);
-        }
-        catch (err) {
-
-        }
-      });
-    }
-
-
 
     if (this.IPAddress == "local") {
-      let responseLocal = fetch(
-        "http://192.168.1.61:8085/data.json",
+
+      let response2 = fetch(
+        "http://192.168.1.61:8086/data.json",
         {
           headers: {
             'Content-Type': 'application/json',
@@ -111,7 +107,28 @@ export class Tab1Page {
         catch (err) {
 
         }
+      }).then(() => {
+        fetch(
+          "http://192.168.1.69:8085/data.json",
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            method: 'GET'
+          }
+        ).then(async result => {
+          let data2 = await result.text();
+          try {
+            let array = JSON.parse(data2);
+            this.findTemp(array.Children);
+            this.Dashboard.sort();
+          }
+          catch (err) {
+
+          }
+        });
       });
+
     }
   }
 
@@ -153,11 +170,14 @@ export class Tab1Page {
       let data2 = await result.text();
       try {
         let array = JSON.parse(data2);
-        this.Ethermine.alreadyPaid = (array.data[0].amount / 1000000000000000000).toFixed(5);
+        this.Ethermine.alreadyPaid = 0;
+        array.data.forEach(payout => {
+          this.Ethermine.alreadyPaid += Number((payout.amount / 1000000000000000000).toFixed(5));
+        });
+
         this.Ethermine.totalPaid = (Number(this.Ethermine.UnpaidBalancer) + Number(this.Ethermine.alreadyPaid));
 
         this.getConversion();
-
       }
       catch (err) {
 
@@ -198,7 +218,7 @@ export class Tab1Page {
       let data2 = await result.text();
       try {
         let array = JSON.parse(data2);
-        this.Ethermine.coinperdayJOAO = ((array.data.coinsPerMin)*24*60).toFixed(5);
+        this.Ethermine.coinperdayJOAO = ((array.data.coinsPerMin) * 24 * 60).toFixed(5);
       }
       catch (err) {
 
@@ -216,7 +236,7 @@ export class Tab1Page {
       let data2 = await result.text();
       try {
         let array = JSON.parse(data2);
-        this.Ethermine.averageHashrate = (array.data[0].averageHashrate/ 1000000).toFixed(2);
+        this.Ethermine.averageHashrate = (array.data[0].averageHashrate / 1000000).toFixed(2);
       }
       catch (err) {
 
@@ -229,13 +249,12 @@ export class Tab1Page {
     jsonResponse.forEach(element => {
 
       if (element.Text.indexOf('NVIDIA') > -1) {
-        this.Dashboard.push({ Name: element.Text, Temperature: element.Children[1].Children[0].Value + " || " + element.Children[1].Children[0].Max});
+        this.Dashboard.push({ Name: element.Text, Temperature: element.Children[1].Children[0].Value + " || " + element.Children[1].Children[0].Max });
       }
       else if (element.Text.indexOf('Intel') > -1) {
         this.Dashboard.push({ Name: element.Text, Temperature: element.Children[1].Children[0].Value + " || " + element.Children[1].Children[0].Max });
       }
-      else if(element.Text.indexOf('Radeon') > -1)
-      {
+      else if (element.Text.indexOf('Radeon') > -1) {
         this.Dashboard.push({ Name: element.Text, Temperature: element.Children[2].Children[0].Value + " || " + element.Children[2].Children[0].Max });
       }
       else {
@@ -244,6 +263,6 @@ export class Tab1Page {
     });
   }
 
-  
+
 
 }

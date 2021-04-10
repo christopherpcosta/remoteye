@@ -46,6 +46,8 @@ export class Tab4Page {
 
       let array = JSON.parse(data);
 
+      array = array.split("\n");
+
       var result = "";
 
       for (var i = 0; i < array.length; i = i + 1) {

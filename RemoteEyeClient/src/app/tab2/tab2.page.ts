@@ -39,12 +39,14 @@ export class Tab2Page {
         response = await fetch('http://109.51.26.39:5000/device1');
       }
       else {
-        response = await fetch('http://192.168.1.61:5000/device1');
+        response = await fetch('http://192.168.1.69:5000/device1');
       }
 
       let data = await response.text();
 
       let array = JSON.parse(data);
+
+      array = array.split("\n");
 
       var result = "";
 

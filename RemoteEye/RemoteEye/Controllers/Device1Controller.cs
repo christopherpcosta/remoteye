@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace RemoteEye.Controllers
 {
@@ -24,27 +25,19 @@ namespace RemoteEye.Controllers
         public string Get()
         {
             try
-            {
-                System.IO.File.Copy(@"C:\Output\output.txt", @"C:\Output\outputTemporary.txt", true);
-                var response = System.IO.File.ReadLines(@"C:\Output\outputTemporary.txt");
+            {          
+                FileStream fs = new FileStream(@"C:\Output\output.txt", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
 
-                var newResponse = new List<string>();
+                var buffer = new byte[4000];
+                fs.Seek(-4000, SeekOrigin.End);
+                fs.Read(buffer, 0, 4000);
 
-                var originalArray = response.ToArray();
-
-                for (var i = response.Count() - 60; i < response.Count(); i++)
-                {
-                    newResponse.Add(originalArray[i]);
-                }
-
-                return JsonConvert.SerializeObject(newResponse);
+                return JsonConvert.SerializeObject(Encoding.UTF8.GetString(buffer.Where(p => p != 0).ToArray()));
             }
             catch (Exception e)
             {
-                return null;
+                return JsonConvert.SerializeObject(e.Message);
             }
-
-
         }
     }
 }
